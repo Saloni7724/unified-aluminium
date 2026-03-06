@@ -1,0 +1,98 @@
+.about-wrapper {
+  background: #f2f3f5;
+}
+
+/* ===== About Section ===== */
+.about-section {
+  display: flex;
+  gap: 80px;
+  padding: 100px 6%;
+  align-items: center;
+}
+
+.about-left {
+  position: relative;
+}
+
+.about-left img {
+  width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.work-badge {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  background: #1f2937;
+  color: white;
+  padding: 20px 25px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.work-badge h2 {
+  font-size: 28px;
+}
+
+.work-badge p {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* Right */
+.about-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.about-content p {
+  flex: 1;
+  color: #555;
+  line-height: 1.7;
+  font-size: 20px;
+}
+
+.about-content ul {
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-content li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #333;
+  font-size: 20px;
+}
+
+.about-content li svg {
+  color: #111827;
+}
+
+.phone-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: #f9fafb;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 19px;
+}
+
+.signature {
+  font-family: cursive;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.about-contact {
+  display: flex;
+  align-items: center;
+  gap: 220px;
+  margin-top: 30px;
+}

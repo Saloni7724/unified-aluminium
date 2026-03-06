@@ -1,0 +1,146 @@
+.projects-wrapper {
+  padding: 100px 80px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== Projects ===== */
+.projects-section {
+  text-align: center;
+  margin-bottom: 120px;
+}
+
+.small-title {
+  font-size: 14px;
+  color: #1e90ff;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.projects-section h2 {
+  font-size: 36px;
+  margin: 20px 0 50px;
+  font-weight: 700;
+}
+
+.projects-grid {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  width: 450px;
+  cursor: pointer;
+}
+
+.project-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.project-card:hover img {
+  transform: scale(1.1);
+}
+
+.project-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 80%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ===== Contact ===== */
+.contact-heading {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 60px;
+  font-weight: 700;
+}
+
+.contact-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.contact-form-box {
+  background: #f8f9fc;
+  padding: 40px;
+  border-radius: 20px;
+  width: 500px;
+}
+
+.contact-form-box h3 {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.contact-form-box input,
+.contact-form-box textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.contact-form-box button {
+  background: #0a2a66;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-info-box {
+  background: #0a2a66;
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 400px;
+}
+
+.contact-info-box h3 {
+  margin-bottom: 30px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.info-item svg {
+  font-size: 20px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .projects-grid,
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project-card,
+  .contact-form-box,
+  .contact-info-box {
+    width: 100%;
+  }
+}
