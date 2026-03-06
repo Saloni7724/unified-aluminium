@@ -303,7 +303,7 @@ const HeroPage = () => {
   </a>
 
   <a
-    href="mailto:youremail@gmail.com"
+    href="mailto:unifiedaluminium@gmail.com"
     title="Send Email"
   >
     <FaEnvelope className="nav-icon email"/>

@@ -57,7 +57,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <span>Work with us</span>
-                  <p>info@ascendia.com</p>
+                  <p>unifiedaluminium@gmail.com</p>
                 </div>
               </div>
             </div>

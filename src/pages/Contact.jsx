@@ -112,7 +112,7 @@ export default function Contact() {
 
          <div className="info-item">
   <span>✉</span>
-  <p>24034211061@gnu.ac.in</p>
+  <p>unifiedaluminium@gmail.com</p>
 </div>
 
 <div className="info-item">
