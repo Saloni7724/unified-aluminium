@@ -144,8 +144,10 @@
 }
 
 /* Responsive for modal */
-@media (max-width: 768px) {
-  .modal-content {
-    padding: 20px 15px;
-  }
+@media (max-width:768px){
+
+.service-card{
+  width:90%;
+}
+
 }

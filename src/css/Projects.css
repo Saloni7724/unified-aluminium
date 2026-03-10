@@ -1,13 +1,11 @@
 .projects-page {
-  padding: 80px 20px;
-  background: #f7f9fc;
+  padding: 90px 20px;
+  background: linear-gradient(180deg,#f7f9fc,#eef2f7);
   text-align: center;
 }
 
 .projects-container {
-
   max-width: 1200px;
-
   margin: auto;
 }
 
@@ -15,64 +13,114 @@
   font-size: 13px;
   letter-spacing: 2px;
   color: #7a7a7a;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
 .main-heading {
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
-  margin-bottom: 50px;
+  margin-bottom: 55px;
   color: #1d2a3a;
+  line-height: 1.4;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-}
+/* PROJECT CARD */
 
 .project-card {
- width: 100%;
-  border-radius: 12px;
+  width: 100%;
+  border-radius: 14px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  transition: 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  cursor: pointer;
+  position: relative;
 }
 
-.project-card:hover {
-  transform: translateY(-6px);
+/* subtle border glow */
+
+.project-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,0.04);
+  pointer-events:none;
 }
+
+/* hover effect */
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.15);
+}
+
+/* IMAGE */
 
 .project-card img {
   width: 100%;
   height: 260px;
   object-fit: cover;
+  transition: transform 0.45s ease;
 }
 
+/* image zoom */
+
+.project-card:hover img{
+  transform: scale(1.08);
+}
+
+/* CARD CONTENT */
+
 .project-info {
-  padding: 20px;
+  padding: 22px;
   text-align: left;
 }
 
 .project-info h3 {
   margin-bottom: 8px;
   font-size: 18px;
+  font-weight: 600;
   color: #1d2a3a;
 }
 
 .project-info p {
   font-size: 14px;
-  color: #555;
-}
-@media (max-width: 900px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  color: #666;
+  line-height: 1.5;
 }
 
-@media (max-width: 600px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
+/* SWIPER */
+
+.swiper {
+  padding-bottom: 50px;
+}
+
+/* ARROWS */
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #1d2a3a;
+  font-weight: bold;
+  transition: transform 0.25s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover{
+  transform: scale(1.15);
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .main-heading {
+    font-size: 26px;
   }
+
+  .project-card img{
+    height:220px;
+  }
+
 }

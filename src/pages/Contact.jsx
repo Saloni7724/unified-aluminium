@@ -1,53 +1,60 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import "../css/Contact.css";
 
 export default function Contact() {
+
   const [formData, setFormData] = useState({
     name: "",
     number: "",
     email: "",
-    message: "",
+    message: ""
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({...formData,[e.target.name]:e.target.value});
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Replace these with your EmailJS credentials
     const serviceID = "service_fxz4jk5";
     const templateID = "template_97dy10d";
     const userID = "alD1gELkiMTN96i8P";
 
-    emailjs
-      .send(serviceID, templateID, formData, userID)
-      .then(
-        (result) => {
-          alert("Message sent successfully!");
-          setFormData({ name: "", number: "", email: "", message: "" });
-        },
-        (error) => {
-          console.error(error);
-          alert("Failed to send message. Try again later.");
-        }
-      );
+    emailjs.send(serviceID,templateID,formData,userID)
+    .then(()=>{
+      alert("Message sent successfully!");
+      setFormData({
+        name:"",
+        number:"",
+        email:"",
+        message:""
+      });
+    })
+    .catch(()=>{
+      alert("Failed to send message.");
+    });
   };
 
   return (
     <section id="contact" className="contact-page">
+
       <div className="contact-header">
         <h1>Let’s Build Something Strong Together</h1>
+        <p>Contact us for aluminium windows, doors & fabrication work.</p>
       </div>
 
       <div className="contact-wrapper">
-        {/* Left Form */}
+
+        {/* CONTACT FORM */}
         <div className="contact-form">
-          <h3>Contact us for a free quote</h3>
+
+          <h3>Get Free Quote</h3>
 
           <form onSubmit={handleSubmit}>
+
             <div className="input-row">
               <input
                 type="text"
@@ -57,10 +64,11 @@ export default function Contact() {
                 onChange={handleChange}
                 required
               />
+
               <input
                 type="text"
                 name="number"
-                placeholder="Number"
+                placeholder="Phone Number"
                 value={formData.number}
                 onChange={handleChange}
                 required
@@ -70,60 +78,71 @@ export default function Contact() {
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="Email Address"
               value={formData.email}
               onChange={handleChange}
               required
             />
+
             <textarea
               name="message"
-              placeholder="Type Your Message"
+              placeholder="Type your message..."
               value={formData.message}
               onChange={handleChange}
               required
             ></textarea>
 
-            <button type="submit">Submit Message</button>
+            <button type="submit">Send Message</button>
+
           </form>
+
         </div>
 
-        {/* Right Info */}
+        {/* CONTACT INFO */}
         <div className="contact-info">
-          <h3>Contact Us</h3>
 
-    
-<div className="info-item">
-  <div className="phone-container">
+          <h3>Contact Information</h3>
 
-    <div className="phone-row">
-      <span className="phone-icon">📞</span>
-      <a href="tel:7874170566">7874170566</a>
-      <a href="tel:9913612354">9913612354</a>
-    </div>
+          <div className="info-item">
+            <FaPhoneAlt className="icon"/>
+            <div className="phone-list">
+              <a href="tel:7874170533">78741 70533</a>
+              <a href="tel:9913612354">99136 12354</a>
+              <a href="tel:9081141149">90811 41149</a>
+              <a href="tel:9408385809">94083 85809</a>
+            </div>
+          </div>
 
-    <div className="phone-row">
-      <span className="phone-icon">📞</span>
-      <a href="tel:9081141149">9081141149</a>
-      <a href="tel:9408382809">9408382809</a>
-    </div>
+          <div className="info-item">
+            <FaEnvelope className="icon"/>
+            <p>unifiedaluminium@gmail.com</p>
+          </div>
 
-  </div>
-</div>
+          <div className="info-item">
+            <FaMapMarkerAlt className="icon"/>
+            <p>
+              75,83 Shyam Complex Opp Golukdham Society  
+              Dediyasan Modhera Road  
+              Mehsana, Gujarat – 384002
+            </p>
+          </div>
 
-         <div className="info-item">
-  <span>✉</span>
-  <p>unifiedaluminium@gmail.com</p>
-</div>
-
-<div className="info-item">
-  <span>📍</span>
-  <p>
-    75,83 Shyam Complex opp Golukdham Society Dediyasan  
-    Modhera Road Mehsana, Gujarat, 384002
-  </p>
-</div>
         </div>
+
       </div>
+
+      {/* GOOGLE MAP */}
+
+      <div className="map-container">
+
+        <iframe
+          title="location"
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3656.3065618291866!2d72.34160227533113!3d23.593336078777835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDM1JzM2LjAiTiA3MsKwMjAnMzkuMCJF!5e0!3m2!1sen!2sin!4v1773045710074!5m2!1sen!2sin"
+          loading="lazy"
+        ></iframe>
+
+      </div>
+
     </section>
   );
 }

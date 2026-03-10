@@ -5,7 +5,7 @@ import { FiPhone } from "react-icons/fi";
 
 const About = () => {
   return (
-    <section id="about" className="about-section">
+    <section id="about" className="about-section" data-aos="fade-up">
 
       <div className="about-left">
         <div className="work-badge">

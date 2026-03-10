@@ -41,81 +41,99 @@ const HeroPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const suggestions = [
-    "about",
-    "services",
-    "projects",
-    "contact",
-    "windows",
-    "wardrobe",
-    "balcony",
-    "partition",
-  ];
+const searchItems = [
+  { keyword: "about", section: "about" },
+  { keyword: "company", section: "about" },
 
-  useEffect(() => {
+  { keyword: "services", section: "services" },
+  { keyword: "window", section: "projects" },
+  { keyword: "wardrobe", section: "projects" },
+  { keyword: "balcony", section: "projects" },
+  { keyword: "partition", section: "projects" },
 
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
+  { keyword: "projects", section: "projects" },
 
-    const sections = document.querySelectorAll("section");
+  { keyword: "contact", section: "contact" },
+];
+ 
+   useEffect(() => {
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-100px 0px -40% 0px",
-        threshold: 0,
-      }
-    );
+  AOS.init({
+    duration: 1000,
+    once: true,
+  });
 
-    sections.forEach((section) => observer.observe(section));
+  const sections = document.querySelectorAll("section");
 
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
 
-    window.addEventListener("scroll", handleScroll);
+  sections.forEach((section) => observer.observe(section));
 
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
-    };
-
-  }, []);
-
-  const handleSearch = (value) => {
-
-    setSearchOpen(false);
-
-    if (value.includes("about")) {
-      document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-    } else if (value.includes("services")) {
-      document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
-    } else if (value.includes("projects")) {
-      document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-    } else if (value.includes("contact")) {
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setScrolled(true);
     } else {
-      alert("No result found");
+      setScrolled(false);
     }
-
   };
 
-  const filteredSuggestions = suggestions.filter((item) =>
-    item.toLowerCase().includes(searchText.toLowerCase())
-  );
-    
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    observer.disconnect();
+    window.removeEventListener("scroll", handleScroll);
+  };
+
+}, []);
+
+
+const handleSearch = (value) => {
+
+  const searchValue = value.toLowerCase().trim();
+
+  setSearchOpen(false);
+
+  // find all headings or searchable items
+  const elements = document.querySelectorAll("section h1, section h2, section h3, section h4");
+
+  let found = false;
+
+  elements.forEach((el) => {
+
+    const text = el.innerText.toLowerCase();
+
+    if (text.includes(searchValue) && !found) {
+
+      const section = el.closest("section");
+
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        found = true;
+      }
+
+    }
+
+  });
+
+  if (!found) {
+    alert("No result found");
+  }
+
+};
+const filteredSuggestions = searchItems
+  .filter((item) =>
+    item.keyword.includes(searchText.toLowerCase())
+  )
+  .map((item) => item.keyword);
    if (loading) {
   return (
     <div className="loader-container">
@@ -140,23 +158,23 @@ const HeroPage = () => {
 
           <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
 
-            <li className={active === "home" ? "active" : ""}>
+            <li className={active === "home" ? "active" : "nav-link"}>
               <a href="#home">Home</a>
             </li>
 
-            <li className={active === "about" ? "active" : ""}>
+            <li className={active === "about" ? "active" : "nav-link"}>
               <a href="#about">About</a>
             </li>
 
-            <li className={active === "services" ? "active" : ""}>
+            <li className={active === "services" ? "active" : "nav-link"}>
               <a href="#services">Services</a>
             </li>
 
-            <li className={active === "projects" ? "active" : ""}>
+            <li className={active === "projects" ? "active" : "nav-link"}>
               <a href="#projects">Projects</a>
             </li>
 
-            <li className={active === "contact" ? "active" : ""}>
+            <li className={active === "contact" ? "active" : "nav-link"}>
               <a href="#contact">Contact</a>
             </li>
 
@@ -165,18 +183,18 @@ const HeroPage = () => {
           <div className="nav-actions">
 
             <button
-              className="icon-btn"
+              className="icon-btn search-btn"
               onClick={() => setSearchOpen(true)}
             >
               <FiSearch />
             </button>
 
             <a href="https://www.instagram.com/unified_aluminium" target="_blank" rel="noreferrer">
-              <FaInstagram className="nav-icon insta"/>
+              <FaInstagram className="icon-btn insta-btn"/>
             </a>
 
             <a href="https://wa.me/919913612354" target="_blank" rel="noreferrer">
-              <FaWhatsapp className="nav-icon whatsapp"/>
+              <FaWhatsapp className="icon-btn whatsapp-btn"/>
             </a>
 
             <a href="#contact">
@@ -234,12 +252,17 @@ const HeroPage = () => {
 
           <div className="search-box-modern">
 
-            <input
-              type="text"
-              placeholder="Search services, projects..."
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
+           <input
+  type="text"
+  placeholder="Search services, projects..."
+  value={searchText}
+  onChange={(e) => setSearchText(e.target.value)}
+  onKeyDown={(e)=>{
+    if(e.key === "Enter"){
+      handleSearch(searchText)
+    }
+  }}
+/>
 
             <button onClick={() => handleSearch(searchText)}>
               <FiSearch />
@@ -291,7 +314,7 @@ const HeroPage = () => {
   target="_blank"
   rel="noreferrer"
 >
- 
+
     <FaWhatsapp className="nav-icon whatsapp"/>
   </a>
 
@@ -303,6 +326,7 @@ const HeroPage = () => {
   </a>
 
   <a
+   
     href="mailto:unifiedaluminium@gmail.com"
     title="Send Email"
   >
