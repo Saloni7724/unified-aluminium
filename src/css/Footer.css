@@ -201,10 +201,11 @@
 
 .contact-item,
 .location-item{
-  justify-content:center;
-  text-align:left;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  flex-wrap:nowrap; /* prevents icon going to new line */
 }
-
 }
 
 .footer-bottom a {
