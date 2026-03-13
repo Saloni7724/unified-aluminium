@@ -31,22 +31,30 @@ img{
   justify-content:space-between;
   align-items:center;
   background:#111;
-  z-index:3000;   /* increase */
+  z-index:3000;
+  transition:0.3s;
 }
+
+.navbar.scrolled{
+  background:#111827;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+}
+
 section{
   scroll-margin-top:90px;
 }
+
 .logo-img{
   height:150px;
   width:auto;
 }
 
 /* NAV LINKS */
-
 .nav-links{
   display:flex;
   list-style:none;
   gap:35px;
+  transition:right 0.3s;
 }
 
 .nav-links li a{
@@ -54,15 +62,22 @@ section{
   color:#f6f6f6;
   font-size:17px;
   font-weight:500;
+  transition: color 0.3s, font-weight 0.3s;
 }
 
-.nav-links li.active a{
-  color:#cfa92a;
-  font-weight:600;
+/* Normal active link */
+.nav-links li.active a {
+  color: #cfa92a;  /* Gold highlight */
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+/* Optional: If navbar has scrolled background */
+.navbar.scrolled .nav-links li.active a {
+  color: #ffcc00;  /* Slightly different color when navbar scrolled */
 }
 
 /* NAV ACTIONS */
-
 .nav-actions{
   display:flex;
   align-items:center;
@@ -70,7 +85,6 @@ section{
 }
 
 /* NAV ICON BUTTONS */
-
 .icon-btn{
   width:30px;
   height:30px;
@@ -83,23 +97,10 @@ section{
   transition:0.3s;
 }
 
-/* Search button */
-.search-btn{
-  background:linear-gradient(135deg,#cfa92a,#f4d03f);
-  color:#111;
-  border:none;
+.icon-btn:hover{
+  transform:scale(1.1);
 }
 
-.contact-sidebar{
-  position:fixed;
-  right:20px;
-  top:50%;
-  transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  z-index:500;  /* lower than navbar */
-}
 /* Instagram button */
 .insta-btn{
   background:#111;
@@ -111,21 +112,14 @@ section{
   background:#111;
   color:#25D366;
 }
+
+/* Email button */
 .email-btn{
-   background:#111;
-    color:#1e90ff;
+  background:#111;
+  color:#1e90ff;
 }
 
-.icon-btn:hover{
-  transform:scale(1.1);
-}
-
-.insta{color:#E1306C;}
-.whatsapp{color:#25D366;}
-.email{color:#3caefa;}
-
-/* BUTTON */
-
+/* BUTTONS */
 .quote-btn1{
   background:#1f2937;
   color:#fff;
@@ -134,6 +128,7 @@ section{
   font-size:16px;
   border-radius:12px;
   cursor:pointer;
+  transition:0.3s;
 }
 
 .quote-btn1:hover{
@@ -141,7 +136,6 @@ section{
 }
 
 /* ================= HERO ================= */
-
 .hero-section{
   height:100vh;
   position:relative;
@@ -168,12 +162,7 @@ section{
   top:0;
   width:45%;
   height:100%;
-  background:linear-gradient(
-    to right,
-    rgba(255,255,255,0),
-    rgba(255,255,255,0.35),
-    rgba(255,255,255,0.9)
-  );
+  background:linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,0.35),rgba(255,255,255,0.9));
 }
 
 .hero-content{
@@ -200,6 +189,7 @@ section{
   border:none;
   border-radius:12px;
   cursor:pointer;
+  transition:0.3s;
 }
 
 .consult-btn:hover{
@@ -207,7 +197,6 @@ section{
 }
 
 /* ================= SEARCH ================= */
-
 .search-overlay{
   position:fixed;
   top:0;
@@ -219,6 +208,7 @@ section{
   flex-direction:column;
   align-items:center;
   justify-content:center;
+  z-index:2000;
 }
 
 .search-box-modern{
@@ -265,40 +255,8 @@ section{
   font-size:22px;
   color:white;
 }
-/* ================= SEARCH SUGGESTIONS ================= */
-
-.suggestions{
-  margin-top:20px;
-  width:420px;
-  max-width:90%;
-  background:white;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-}
-
-.suggestion-item{
-  padding:14px 20px;
-  border-bottom:1px solid #eee;
-  cursor:pointer;
-  font-size:16px;
-  color:#333;
-    transition:0.2s;
-}
-
-.suggestion-item:last-child{
-  border-bottom:none;
-}
-
-.suggestion-item:hover{
-  background:#f5f5f5;
-}
-.search-overlay{
-  z-index:2000;
-}
 
 /* ================= CONTACT SIDEBAR ================= */
-
 .contact-sidebar{
   position:fixed;
   right:20px;
@@ -327,7 +285,6 @@ section{
 }
 
 /* ================= LOADER ================= */
-
 .loader-container{
   height:100vh;
   width:100%;
@@ -348,7 +305,6 @@ section{
 }
 
 /* ================= HAMBURGER ================= */
-
 .hamburger{
   display:none;
   font-size:28px;
@@ -356,128 +312,8 @@ section{
   cursor:pointer;
   z-index:4000;
 }
-/* ================= TABLET ================= */
 
-@media(max-width:992px){
-
-.hero-section{
-  padding:0 30px;
-}
-
-.hero-content h1{
-  font-size:40px;
-}
-
-.nav-links{
-  position:fixed;
-  top:80px;
-  right:-100%;
-  width:250px;
-  height:100vh;
-  background:#0f172a;
-  flex-direction:column;
-  padding:40px 20px;
-  gap:20px;
-  transition:0.3s;
-}
-.icon-btn{
-  width:25px;
-  height:25px;
-  font-size:18px;
-}
-
-.icon-btn:hover{
-  transform:scale(1.08);
-  box-shadow:0 5px 15px rgba(0,0,0,0.25);
-}
-
-.nav-links.open{
-  right:0;
-}
-
-.hamburger{
-  display:block;
-}
- 
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:768px){
-
-.hero-section{
-  padding:0 20px;
-}
-
-.hero-content{
-  margin:0;
-}
-
-.hero-content h1{
-  font-size:30px;
-}
-
-.hero-content p{
-  font-size:15px;
-}
-
-.logo-img{
-  height:110px;
-}
-
-.icon-btn{
-  width:22px;
-  height:22px;
-  font-size:16px;
-}
-
-.icon-btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
-}
-.quote-btn1{
-  display:none;
-}
-
-.contact-sidebar{
-  right:10px;
-}
-
-.contact-sidebar a{
-  width:40px;
-  height:40px;
-}
-
-}
-
-/* ================= LARGE SCREENS ================= */
-
-@media(min-width:1400px){
-
-
-
-.hero-content p{
-  font-size:20px;
-}
-
-.nav-links li a{
-  font-size:18px;
-}
-
-
-.icon-btn{
-  width:30px;
-  height:30px;
-  font-size:22px;
-}
-
-.icon-btn-btn:hover{
-  transform:scale(1.12);
-  box-shadow:0 8px 22px rgba(0,0,0,0.35);
-}
-
-}
-/* Bottom Contact Buttons */
+/* ================= BOTTOM CONTACT BUTTONS ================= */
 .bottom-contact {
   position: fixed;
   bottom: 70px;
@@ -489,144 +325,184 @@ section{
   animation: slideUp 1s ease-out forwards;
 }
 
-/* Individual Buttons */
 .bottom-contact a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  color: white;
-  font-size: 28px;
-  text-decoration: none;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  color:white;
+  font-size:28px;
+  text-decoration:none;
+  box-shadow:0 6px 20px rgba(0,0,0,0.3);
   transition: transform 0.3s, box-shadow 0.3s;
   animation: pulse 2s infinite;
 }
 
 .bottom-contact a:hover {
   transform: scale(1.2);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  box-shadow:0 12px 30px rgba(0,0,0,0.5);
 }
 
-.bottom-whatsapp {
-  background: #25D366; /* WhatsApp green */
-}
-
-.bottom-phone {
-  background: #0e2a66; /* Brand color */
-}
-
-/* Slide in from bottom */
-@keyframes slideUp {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Subtle pulse/glow effect */
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0);
-  }
-  50% {
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 15px rgba(255,255,255,0.3);
-  }
-}
-
-/* Responsive: smaller buttons on mobile */
-@media(max-width:768px) {
-  .bottom-contact a {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-  }
-}
-/* ================= Bottom WhatsApp Button Waves ================= */
+/* WhatsApp Button Waves */
 .bottom-whatsapp {
   position: relative;
-  z-index: 1;
+  z-index:1;
   overflow: visible;
+  background:#25D366;
 }
 
-/* Create two expanding wave layers */
 .bottom-whatsapp::before,
-.bottom-whatsapp::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  top: 0;
-  left: 0;
-  background: rgba(37, 211, 102, 0.4); /* semi-transparent WhatsApp green */
-  z-index: -1;
-  animation: whatsapp-wave 2s infinite;
+.bottom-whatsapp::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  top:0;
+  left:0;
+  background:rgba(37,211,102,0.4);
+  z-index:-1;
+  animation:whatsapp-wave 2s infinite;
+}
+.bottom-whatsapp::after{
+  animation-delay:1s;
 }
 
-.bottom-whatsapp::after {
-  animation-delay: 1s; /* stagger second wave for continuous ripple effect */
-}
-
-/* Wave animation */
-@keyframes whatsapp-wave {
-  0% {
-    transform: scale(0.7);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.3;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-/* ================= Bottom Phone Button Waves ================= */
+/* Phone Button Waves */
 .bottom-phone {
   position: relative;
-  z-index: 1;
+  z-index:1;
   overflow: visible;
+  background:#0e2a66;
 }
 
-/* Create two expanding wave layers */
 .bottom-phone::before,
-.bottom-phone::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  top: 0;
-  left: 0;
-  background: rgba(14, 42, 102, 0.4); /* semi-transparent phone brand color */
-  z-index: -1;
-  animation: phone-wave 2s infinite;
+.bottom-phone::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  top:0;
+  left:0;
+  background:rgba(14,42,102,0.4);
+  z-index:-1;
+  animation:phone-wave 2s infinite;
+}
+.bottom-phone::after{
+  animation-delay:1s;
 }
 
-.bottom-phone::after {
-  animation-delay: 1s; /* stagger second wave for continuous ripple */
+/* Wave Animations */
+@keyframes whatsapp-wave{
+  0%{transform:scale(0.7);opacity:0.6;}
+  50%{transform:scale(1.5);opacity:0.3;}
+  100%{transform:scale(2);opacity:0;}
 }
 
-/* Wave animation */
-@keyframes phone-wave {
-  0% {
-    transform: scale(0.7);
-    opacity: 0.6;
+@keyframes phone-wave{
+  0%{transform:scale(0.7);opacity:0.6;}
+  50%{transform:scale(1.5);opacity:0.3;}
+  100%{transform:scale(2);opacity:0;}
+}
+
+@keyframes slideUp{
+  0%{transform:translateY(100px);opacity:0;}
+  100%{transform:translateY(0);opacity:1;}
+}
+
+@keyframes pulse{
+  0%,100%{box-shadow:0 6px 20px rgba(0,0,0,0.3),0 0 10px rgba(255,255,255,0);}
+  50%{box-shadow:0 8px 25px rgba(0,0,0,0.4),0 0 15px rgba(255,255,255,0.3);}
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:992px){
+  .hero-section{
+    padding:0 30px;
   }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.3;
+
+  .hero-content h1{
+    font-size:40px;
   }
-  100% {
-    transform: scale(2);
-    opacity: 0;
+
+  .nav-links{
+    position:fixed;
+    top:80px;
+    right:-100%;
+    width:250px;
+    height:100vh;
+    background:#0f172a;
+    flex-direction:column;
+    padding:40px 20px;
+    gap:20px;
+  }
+
+  .nav-links.open{
+    right:0;
+  }
+
+  .hamburger{
+    display:block;
+  }
+
+  .icon-btn{
+    width:25px;
+    height:25px;
+    font-size:18px;
+  }
+}
+
+@media(max-width:768px){
+  .hero-section{
+    padding:0 20px;
+  }
+  .hero-content{
+    margin:0;
+  }
+  .hero-content h1{
+    font-size:30px;
+  }
+  .hero-content p{
+    font-size:15px;
+  }
+  .logo-img{
+    height:110px;
+  }
+  .icon-btn{
+    width:22px;
+    height:22px;
+    font-size:16px;
+  }
+  .quote-btn1{
+    display:none;
+  }
+  .contact-sidebar{
+    right:10px;
+  }
+  .contact-sidebar a{
+    width:40px;
+    height:40px;
+  }
+  .bottom-contact a{
+    width:50px;
+    height:50px;
+    font-size:24px;
+  }
+}
+
+@media(min-width:1400px){
+  .hero-content p{
+    font-size:20px;
+  }
+  .nav-links li a{
+    font-size:18px;
+  }
+  .icon-btn{
+    width:30px;
+    height:30px;
+    font-size:22px;
   }
 }
