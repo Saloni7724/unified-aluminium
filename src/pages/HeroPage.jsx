@@ -1,15 +1,7 @@
 import "../css/HeroPage.css";
 import React, { useEffect, useState } from "react";
 import logo from "../photos/logo.png";
-import {
-  FaInstagram,
-  FaWhatsapp,
-  FaPhoneAlt,
-  FaEnvelope
-} from "react-icons/fa";
-
-import { FiSearch, FiX } from "react-icons/fi";
-
+import { FaInstagram, FaWhatsapp, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import heroImage from "../photos/bg1.jpg";
 import unifiedLogo from "../photos/logo.png";
 
@@ -27,42 +19,17 @@ import "aos/dist/aos.css";
 const HeroPage = () => {
 
   const [active, setActive] = useState("home");
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(true);
-   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-const searchItems = [
-  { keyword: "about", section: "about" },
-  { keyword: "company", section: "about" },
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  { keyword: "services", section: "services" },
-  { keyword: "window", section: "projects" },
-  { keyword: "wardrobe", section: "projects" },
-  { keyword: "balcony", section: "projects" },
-  { keyword: "partition", section: "projects" },
-
-  { keyword: "projects", section: "projects" },
-
-  { keyword: "contact", section: "contact" },
-];
- 
-   useEffect(() => {
-
-  AOS.init({
-    duration: 1000,
-    once: true,
-  });
-
+  // ===================== ACTIVE LINK OBSERVER =====================
+useEffect(() => {
   const sections = document.querySelectorAll("section");
 
   const observer = new IntersectionObserver(
@@ -73,230 +40,102 @@ const searchItems = [
         }
       });
     },
-    { threshold: 0.6 }
+    {
+      rootMargin: "-45% 0px -45% 0px",
+      threshold: 0
+    }
   );
 
   sections.forEach((section) => observer.observe(section));
 
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll);
-
-  return () => {
-    observer.disconnect();
-    window.removeEventListener("scroll", handleScroll);
-  };
-
+  return () => observer.disconnect();
 }, []);
 
 
-const handleSearch = (value) => {
 
-  const searchValue = value.toLowerCase().trim();
-
-  setSearchOpen(false);
-
-  // find all headings or searchable items
-  const elements = document.querySelectorAll("section h1, section h2, section h3, section h4");
-
-  let found = false;
-
-  elements.forEach((el) => {
-
-    const text = el.innerText.toLowerCase();
-
-    if (text.includes(searchValue) && !found) {
-
-      const section = el.closest("section");
-
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-        found = true;
-      }
-
-    }
-
-  });
-
-  if (!found) {
-    alert("No result found");
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <img src={logo} alt="logo" className="logo-loader" />
+      </div>
+    );
   }
-
-};
-const filteredSuggestions = searchItems
-  .filter((item) =>
-    item.keyword.includes(searchText.toLowerCase())
-  )
-  .map((item) => item.keyword);
-   if (loading) {
-  return (
-    <div className="loader-container">
-      <img src={logo} alt="logo" className="logo-loader" />
-    </div>
-  );
-}
-
 
   return (
     <>
-
       <div className="hero-wrapper">
-
         {/* ===== Navbar ===== */}
-
         <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-
           <div className="logo">
             <img src={unifiedLogo} alt="Unified Aluminium" className="logo-img" />
           </div>
 
-          <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
-
-            <li className={active === "home" ? "active" : "nav-link"}>
-              <a href="#home">Home</a>
-            </li>
-
-            <li className={active === "about" ? "active" : "nav-link"}>
-              <a href="#about">About</a>
-            </li>
-
-            <li className={active === "services" ? "active" : "nav-link"}>
-              <a href="#services">Services</a>
-            </li>
-
-            <li className={active === "projects" ? "active" : "nav-link"}>
-              <a href="#projects">Projects</a>
-            </li>
-
-            <li className={active === "contact" ? "active" : "nav-link"}>
-              <a href="#contact">Contact</a>
-            </li>
-
-          </ul>
+         
+        <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
+  {["home", "about", "services", "projects", "contact"].map((sectionId) => (
+    <li
+      key={sectionId}
+      className={`nav-link ${active === sectionId ? "active" : ""}`}
+    >
+      <a
+        href={`#${sectionId}`}
+        onClick={() => setActive(sectionId)}
+      >
+        {sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}
+      </a>
+    </li>
+  ))}
+</ul>
 
           <div className="nav-actions">
+  <a href="https://www.instagram.com/unified_aluminium" target="_blank" rel="noreferrer">
+    <FaInstagram className="icon-btn insta-btn"/>
+  </a>
+  
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=unifiedaluminium@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaEnvelope className="icon-btn email-btn"/>
+        </a>
 
-            <button
-              className="icon-btn search-btn"
-              onClick={() => setSearchOpen(true)}
-            >
-              <FiSearch />
-            </button>
 
-            <a href="https://www.instagram.com/unified_aluminium" target="_blank" rel="noreferrer">
-              <FaInstagram className="icon-btn insta-btn"/>
-            </a>
+  <a href="#contact">
+    <button className="quote-btn1">Get Quote</button>
+  </a>
 
-            <a href="https://wa.me/919913612354" target="_blank" rel="noreferrer">
-              <FaWhatsapp className="icon-btn whatsapp-btn"/>
-            </a>
-
-            <a href="#contact">
-              <button className="quote-btn1">Get Quote</button>
-            </a>
-
-            {/* Hamburger */}
-            <div
-              className="hamburger"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              ☰
-            </div>
-
-          </div>
-
+  {/* Hamburger */}
+  <div
+    className="hamburger"
+    onClick={() => setMenuOpen(!menuOpen)}
+  >
+    ☰
+  </div>
+</div>
         </nav>
 
         {/* ===== Hero Section ===== */}
-
         <section
           id="home"
           className="hero-section"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-          }}
+          style={{ backgroundImage: `url(${heroImage})` }}
         >
-
           <div className="hero-right-overlay"></div>
-
           <div className="hero-content">
-
             <h1>Building the Future with Aluminium Excellence</h1>
-
             <p>
               We specialize in delivering high-quality aluminium solutions
               designed for strength, durability, and modern aesthetics.
             </p>
-
             <a href="#contact">
               <button className="consult-btn">Get Consultant</button>
             </a>
-
           </div>
-
         </section>
-
       </div>
 
-      {/* ===== Search Overlay ===== */}
-
-      {searchOpen && (
-
-        <div className="search-overlay">
-
-          <div className="search-box-modern">
-
-           <input
-  type="text"
-  placeholder="Search services, projects..."
-  value={searchText}
-  onChange={(e) => setSearchText(e.target.value)}
-  onKeyDown={(e)=>{
-    if(e.key === "Enter"){
-      handleSearch(searchText)
-    }
-  }}
-/>
-
-            <button onClick={() => handleSearch(searchText)}>
-              <FiSearch />
-            </button>
-
-            <span
-              className="close-search"
-              onClick={() => setSearchOpen(false)}
-            >
-              <FiX />
-            </span>
-
-          </div>
-
-          <div className="suggestions">
-
-            {filteredSuggestions.map((item, index) => (
-              <div
-                key={index}
-                className="suggestion-item"
-                onClick={() => handleSearch(item)}
-              >
-                {item}
-              </div>
-            ))}
-
-          </div>
-
-        </div>
-
-      )}
-
       {/* ===== Website Sections ===== */}
-
       <About />
       <Services />
       <Stats />
@@ -306,42 +145,20 @@ const filteredSuggestions = searchItems
       <Footer />
 
       {/* ===== Floating Contact Sidebar ===== */}
-
-      <div className="contact-sidebar">
-
+ {/* ===== Bottom Floating Contact Buttons ===== */}
+<div className="bottom-contact">
   <a
-  href="https://wa.me/919913612354?text=Hello%2C%20I%20came%20across%20Unified%20Aluminium%20through%20your%20website%20and%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20your%20aluminium%20solutions.%20Could%20you%20please%20assist%20me%20with%20a%20quotation%3F"
-  target="_blank"
-  rel="noreferrer"
->
-
-    <FaWhatsapp className="nav-icon whatsapp"/>
-  </a>
-
-  <a
-    href="tel:+919913612354"
-    title="Call Us"
-  >
-    <FaPhoneAlt/>
-  </a>
-
-  <a
-   
-    href="mailto:unifiedaluminium@gmail.com"
-    title="Send Email"
-  >
-    <FaEnvelope className="nav-icon email"/>
-  </a>
-
-  <a
-    href="https://www.instagram.com/unified_aluminium/"
+    href="https://wa.me/919913612354?text=Hello!%20I%20am%20interested%20in%20your%20services."
     target="_blank"
     rel="noreferrer"
-    title="Instagram"
+    className="bottom-whatsapp"
   >
-    <FaInstagram className="nav-icon insta"/>
+    <FaWhatsapp />
   </a>
 
+  <a href="tel:+919913612354" className="bottom-phone">
+    <FaPhoneAlt />
+  </a>
 </div>
 
     </>

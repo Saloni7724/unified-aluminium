@@ -1,57 +1,50 @@
 import React from "react";
 import "../css/About.css";
-import { FaCheckCircle } from "react-icons/fa";
-import { FiPhone } from "react-icons/fi";
+import about from "../photos/about.png";
 
 const About = () => {
   return (
-    <section id="about" className="about-section" data-aos="fade-up">
+    <section id="about" className="about-modern">
 
-      <div className="about-left">
-        <div className="work-badge">
-          <h2>120+</h2>
-          <p>Work Done</p>
+      <div className="about-container">
+
+        {/* LEFT CONTENT */}
+        <div className="about-text">
+
+          <h2>
+            Welcome to <span>Unified Aluminium</span>
+          </h2>
+
+         <p>
+  At Unified Aluminium, we specialize in high-quality aluminium fabrication
+  solutions including windows, doors, partitions, railings, and custom
+  installations. As a growing business, we are dedicated to delivering
+  modern, durable, and stylish aluminium solutions for both residential
+  and commercial spaces.
+</p>
+
+<p>
+  Even in our first year, we have successfully completed multiple projects
+  with a strong focus on precision, quality materials, and customer
+  satisfaction. Our goal is to provide reliable workmanship and build
+  long-term relationships by delivering aluminium solutions that combine
+  functionality, strength, and modern design.
+</p>
+
+     <a href="#projects">
+  <button className="about-btn">VIEW OUR PROJECTS</button>
+</a>
+
         </div>
 
-        <img
-          src="https://images.unsplash.com/photo-1551836022-d5d88e9218df"
-          alt="About"
-        />
+        {/* RIGHT IMAGE */}
+        <div className="about-image">
+           <img src={about}
+           alt="about"
+            className="img-about"    />
+        </div>
+
       </div>
-
-      <div className="about-right">
-  <span className="small-title">MORE ABOUT US</span>
-
-  <h1>
-    Building the Future with <br />
-    Aluminium Excellence
-  </h1>
-
-  <div className="about-content">
-    <p>
-      We deliver modern and durable aluminium solutions with a focus on quality,
-      precision, and customer satisfaction.
-    </p>
-
-    <ul>
-      <li><FaCheckCircle /> Modern Designs</li>
-      <li><FaCheckCircle /> Professional Installation</li>
-      <li><FaCheckCircle /> Quality Materials & Finishing</li>
-    </ul>
-  </div>
-
-  <div className="about-contact">
-    <div className="phone-box">
-      <FiPhone />
-      <div>
-        <small>Call us anytime</small>
-        <strong>+91 9913612354</strong>
-      </div>
-    </div>
-
-    <div className="signature">Nishu Patel</div>
-  </div>
-</div>
 
     </section>
   );

@@ -19,9 +19,9 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const serviceID = "service_fxz4jk5";
-    const templateID = "template_97dy10d";
-    const userID = "alD1gELkiMTN96i8P";
+    const serviceID = "service_bbo7mno";
+    const templateID = "template_1tsobmt";
+    const userID = "hQnXIuLIjYheZ320D";
 
     emailjs.send(serviceID,templateID,formData,userID)
     .then(()=>{
@@ -98,36 +98,47 @@ export default function Contact() {
 
         </div>
 
+      
+
         {/* CONTACT INFO */}
-        <div className="contact-info">
+<div className="contact-info">
 
-          <h3>Contact Information</h3>
+  <h3>Contact Information</h3>
 
-          <div className="info-item">
-            <FaPhoneAlt className="icon"/>
-            <div className="phone-list">
-              <a href="tel:7874170533">78741 70533</a>
-              <a href="tel:9913612354">99136 12354</a>
-              <a href="tel:9081141149">90811 41149</a>
-              <a href="tel:9408385809">94083 85809</a>
-            </div>
-          </div>
+  {/* PHONE NUMBERS */}
+  <div className="info-item">
+    <FaPhoneAlt className="icon"/>
+    <div className="phone-list">
+      <p><strong>Jay Patel:</strong> <a href="tel:7874170533">78741 70533</a></p>
+      <p><strong>Nsihu Patel:</strong> <a href="tel:9913612354">99136 12354</a></p>
+      <p><strong>Ashish Patel:</strong> <a href="tel:9081141149">90811 41149</a></p>
+      <p><strong>umang Patel:</strong> <a href="tel:9408385809">94083 85809</a></p>
+    </div>
+  </div>
 
-          <div className="info-item">
-            <FaEnvelope className="icon"/>
-            <p>unifiedaluminium@gmail.com</p>
-          </div>
+  {/* EMAIL */}
+  <div className="info-item">
+    <FaEnvelope className="icon"/>
+    <a
+      href="mailto:unifiedaluminium@gmail.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      unifiedaluminium@gmail.com
+    </a>
+  </div>
 
-          <div className="info-item">
-            <FaMapMarkerAlt className="icon"/>
-            <p>
-              75,83 Shyam Complex Opp Golukdham Society  
-              Dediyasan Modhera Road  
-              Mehsana, Gujarat – 384002
-            </p>
-          </div>
+  {/* ADDRESS */}
+  <div className="info-item">
+    <FaMapMarkerAlt className="icon"/>
+    <p>
+      75,83 Shyam Complex Opp Golukdham Society<br/>
+      Dediyasan Modhera Road<br/>
+      Mehsana, Gujarat – 384002
+    </p>
+  </div>
 
-        </div>
+</div>
 
       </div>
 

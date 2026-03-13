@@ -15,7 +15,7 @@ import curveImg from "../photos/hallcurve.png";
 import goldenImg from "../photos/hallgolden.png";
 import squareImg from "../photos/hallsquare.png";
 import blackImg from "../photos/officeblack.png";
-
+import wooden from "../photos/wooden.png";
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -28,21 +28,36 @@ import "swiper/css/effect-coverflow";
 export default function Projects() {
 
 const projects = [
-  { img: windowImg, title:"Residential Windows Installation", desc:"Modern aluminium sliding windows for contemporary homes."},
-  { img: partitionImg, title:"Modern Glass Wardrobe", desc:"Elegant black glass wardrobe with aluminium framing."},
-  { img: BalconyImg, title:"Residential Glass Balcony", desc:"Premium glass balcony system for modern architecture."},
-  { img: wardrobeImg, title:"Modern Wardrobe Design", desc:"Stylish aluminium and glass wardrobes for interiors."},
-  { img: officedoorImg, title:"Modern Office Glass Door", desc:"Durable aluminium office doors with smooth operation."},
-  { img: windows1Img, title:"Classic Sliding Window", desc:"Elegant sliding window with grid detailing."},
-  { img: window1Img, title:"Central Opening Window", desc:"Windows that swing from the middle."},
-  { img: officegateImg, title:"Slim Partition With Door", desc:"Elegant slim partitions with integrated doors."},
-  { img: window2Img, title:"Casement Window With Grill", desc:"Secure windows with metal grill."},
+ 
+ { img: windowImg, title:"Openable Window Without Grill", desc:"Simple openable window with clear glass design."},
 
-  { img: blackImg, title:"Casement Window With Grill", desc:"Secure windows with metal grill."},
-  { img: squareImg, title:"Casement Window With Grill", desc:"Secure windows with metal grill."},
-  { img: goldenImg, title:"Casement Window With Grill", desc:"Secure windows with metal grill."},
-  { img: curveImg, title:"Casement Window With Grill", desc:"Secure windows with metal grill."},
-  { img: classicImg, title:"Casement Window With Grill", desc:"Secure windows with metal grill."}
+{ img: partitionImg, title:"Slim Partition", desc:"Modern slim glass partition for stylish interiors."},
+
+{ img: BalconyImg, title:"Aluminium Glass Railing", desc:"Strong and modern railing for balconies."},
+
+{ img: wardrobeImg, title:"Slider Profile", desc:"Smooth sliding aluminium profile system."},
+
+{ img: officedoorImg, title:"Slim Partition", desc:"Sleek glass partition perfect for offices."},
+
+{ img: windows1Img, title:"Classic Sliding Window", desc:"Classic sliding window with elegant design."},
+
+{ img: window1Img, title:"Central Opening Window", desc:"Window that opens smoothly from the center."},
+
+{ img: officegateImg, title:"Slim Partition With Door", desc:"Slim glass partition with integrated door."},
+
+{ img: window2Img, title:"Casement Window With Grill", desc:"Secure casement window with strong grill."},
+
+{ img: wooden, title:"Slim Partition", desc:"Elegant slim partition with modern finish."},
+
+{ img: blackImg, title:"Slim Partition", desc:"Stylish black frame slim glass partition."},
+
+{ img: squareImg, title:"Slim Partition", desc:"Clean square frame partition design."},
+
+{ img: goldenImg, title:"Slim Partition", desc:"Premium golden finish slim partition."},
+
+{ img: curveImg, title:"Slim Partition", desc:"Modern curved design glass partition."},
+
+{ img: classicImg, title:"Aluminium Profile", desc:"Strong aluminium profile for modern frames."}
 ];
 
 return (
@@ -55,7 +70,7 @@ Delivering precision and quality in every aluminium installation.
 </h1>
 
 <Swiper
-modules={[Navigation, Autoplay, EffectCoverflow]}
+    modules={[Navigation, Autoplay, EffectCoverflow]}
 effect="coverflow"
 centeredSlides={true}
 slidesPerView={3}

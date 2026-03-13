@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FaStar, FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { auth, provider, db } from "../Components/firebase-init";
-import { signInWithPopup, signOut } from "firebase/auth";
 import { MdVerified } from "react-icons/md";
+import { auth, provider, db } from "../Components/firebase-init";
 import {
+  signInWithRedirect,
+  getRedirectResult,
+  signOut
+} from "firebase/auth";
 
+import {
   collection,
   addDoc,
   query,
@@ -27,7 +31,6 @@ export default function Feedback() {
   /* ---------------- FETCH FEEDBACK ---------------- */
   useEffect(() => {
     const q = query(collection(db, "feedbacks"), orderBy("timestamp", "desc"));
-
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -53,13 +56,28 @@ export default function Feedback() {
   /* ---------------- GOOGLE LOGIN ---------------- */
   const handleGoogleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
+      await signInWithRedirect(auth, provider); // works on mobile & desktop
     } catch (error) {
       console.error(error);
       alert("Google login failed");
     }
   };
+
+  /* ---------------- HANDLE REDIRECT RESULT ---------------- */
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result?.user) {
+          setUser(result.user);
+        } else {
+          // If user is already logged in, get current user
+          if (auth.currentUser) setUser(auth.currentUser);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   /* ---------------- SIGN OUT ---------------- */
   const handleSignOut = async () => {
@@ -69,28 +87,28 @@ export default function Feedback() {
 
   /* ---------------- SUBMIT FEEDBACK ---------------- */
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!review.trim()) return alert("Please write feedback!");
-  if (!user) return alert("Please login first");
+    if (!review.trim()) return alert("Please write feedback!");
+    if (!user) return alert("Please login first");
 
-  try {
-    await addDoc(collection(db, "feedbacks"), {
-      name: user.displayName,
-      review: review,
-      rating: rating,
-      photo: user.photoURL, // Google profile photo
-      timestamp: serverTimestamp(),
-    });
+    try {
+      await addDoc(collection(db, "feedbacks"), {
+        name: user.displayName,
+        review: review,
+        rating: rating,
+        photo: user.photoURL,
+        timestamp: serverTimestamp(),
+      });
 
-    setReview("");
-    setRating(5);
+      setReview("");
+      setRating(5);
 
-    alert("Feedback submitted!");
-  } catch (error) {
-    console.error(error);
-  }
-};
+      alert("Feedback submitted!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   /* ---------------- CAROUSEL NAVIGATION ---------------- */
   const nextSlide = () => {
@@ -126,9 +144,7 @@ export default function Feedback() {
               className="user-photo"
               onError={(e) => (e.target.src = fallbackPhoto)}
             />
-
             <span>{user.displayName || "Anonymous"}</span>
-
             <button className="signout-btn" onClick={handleSignOut}>
               Sign Out
             </button>
@@ -143,7 +159,6 @@ export default function Feedback() {
               value={review}
               onChange={(e) => setReview(e.target.value)}
             />
-
             <select
               value={rating}
               onChange={(e) => setRating(Number(e.target.value))}
@@ -154,7 +169,6 @@ export default function Feedback() {
                 </option>
               ))}
             </select>
-
             <button type="submit">Submit Feedback</button>
           </form>
         )}
@@ -168,12 +182,12 @@ export default function Feedback() {
           </button>
 
           <div className="testimonial-card">
-           <img
-  src={customer?.photo}
-  alt="Customer"
-  className="customer-photo"
-  referrerPolicy="no-referrer"
-/>
+            <img
+              src={customer?.photo}
+              alt="Customer"
+              className="customer-photo"
+              referrerPolicy="no-referrer"
+            />
             <p className="testimonial-text">{customer.review}</p>
 
             <div className="stars">
@@ -182,13 +196,13 @@ export default function Feedback() {
               ))}
             </div>
 
-           <h4 className="customer-name">
-  {customer.name || "Anonymous"}
-  <span className="verified-wrapper">
-    <MdVerified className="verified-badge"/>
-    <span className="verified-tooltip">Verified Google User</span>
-  </span>
-</h4>
+            <h4 className="customer-name">
+              {customer.name || "Anonymous"}
+              <span className="verified-wrapper">
+                <MdVerified className="verified-badge" />
+                <span className="verified-tooltip">Verified Google User</span>
+              </span>
+            </h4>
           </div>
 
           <button className="arrow right" onClick={nextSlide}>

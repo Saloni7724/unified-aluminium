@@ -40,14 +40,14 @@ export default function Footer() {
           <div className="contact-grid">
 
             {/* Left side */}
-            <div>
+            
               <div className="contact-item">
                 <div className="icon-circle">
                   <FiPhone />
                 </div>
                 <div>
-                  <span>Call Us 24/7</span>
-                  <p>(+91) 9913612654</p>
+                  <span>Call Us Anytime</span><br />
+                  <a href="tel:7874170533">78741 70533</a>
                 </div>
               </div>
 
@@ -56,11 +56,17 @@ export default function Footer() {
                   <FiMail />
                 </div>
                 <div>
-                  <span>Work with us</span>
-                  <p>unifiedaluminium@gmail.com</p>
+                  <span>Work with us</span><br />
+                 <a
+    href="https://mail.google.com/mail/?view=cm&fs=1&to=unifiedaluminium@gmail.com"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    unifiedaluminium@gmail.com
+  </a>
                 </div>
               </div>
-            </div>
+            
 
             {/* Right side (Location separate row) */}
             <div className="location-item">
@@ -82,11 +88,10 @@ export default function Footer() {
         </div>
 
       </div>
-
-      <div className="footer-bottom">
-       © 2026 Unified Aluminium. All Rights Reserved.
-Website by Saloni
-      </div>
+<div className="footer-bottom">
+  © 2026 Unified Aluminium. All Rights Reserved. 
+ Design by <a href="mailto:saloni7874patel@gmail.com">Saloni Patel</a>
+</div>
     </footer>
   );
 }

@@ -19,14 +19,15 @@ const Services = () => {
     },
     {
       id: 3,
-      title: "Custom Fabrication",
-      description: "Precision-made aluminium frames and partitions tailored to your needs.",
-      details: "We offer custom aluminium fabrication services including frames, partitions, and panels. Every project is tailored to your specifications for both style and functionality.",
+      title: "Glass Work And ACP Works",
+    description: "High-quality glass and ACP installations designed for modern aesthetics and durability.",
+
+details: "Our services include precision glass fitting and Aluminium Composite Panel (ACP) works. We specialize in partitions, facades, and interior installations, ensuring every project combines elegance with long-lasting functionality. Tailored solutions meet both residential and commercial requirements."
     },
   ];
 
   return (
-    <section id="services" className="services-section" data-aos="fade-right">
+    <section id="services" className="services-section" >
       <div className="services-title">
         <span>OUR SERVICES</span>
         <h2>High Quality Services</h2>
@@ -48,20 +49,26 @@ const Services = () => {
       </div>
 
       {/* Modal */}
-      {selectedService && (
-        <div className="modal" onClick={() => setSelectedService(null)}>
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3>{selectedService.title}</h3>
-            <p>{selectedService.details}</p>
-            <button className="close-btn" onClick={() => setSelectedService(null)}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+     {selectedService && (
+  <div
+    className={`modal show`}
+    onClick={() => setSelectedService(null)}
+  >
+    <div
+      className="modal-content"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="close-btn"
+        onClick={() => setSelectedService(null)}
+      >
+        &times;
+      </button>
+      <h3>{selectedService.title}</h3>
+      <p>{selectedService.details}</p>
+    </div>
+  </div>
+)}
     </section>
   );
 };
