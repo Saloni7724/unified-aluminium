@@ -5,7 +5,8 @@ import { auth, provider, db } from "../Components/firebase-init";
 import {
   signInWithRedirect,
   getRedirectResult,
-  signOut
+  signOut,
+   onAuthStateChanged
 } from "firebase/auth";
 
 import {
@@ -64,21 +65,30 @@ export default function Feedback() {
   };
 
   /* ---------------- HANDLE REDIRECT RESULT ---------------- */
-  useEffect(() => {
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result?.user) {
-          setUser(result.user);
-        } else {
-          // If user is already logged in, get current user
-          if (auth.currentUser) setUser(auth.currentUser);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+useEffect(() => {
 
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      setUser(currentUser);
+    }
+  });
+
+  const checkRedirect = async () => {
+    try {
+      const result = await getRedirectResult(auth);
+      if (result?.user) {
+        setUser(result.user);
+      }
+    } catch (error) {
+      console.error("Redirect error:", error);
+    }
+  };
+
+  checkRedirect();
+
+  return () => unsubscribe();
+
+}, []);
   /* ---------------- SIGN OUT ---------------- */
   const handleSignOut = async () => {
     await signOut(auth);

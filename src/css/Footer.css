@@ -207,6 +207,13 @@
   flex-wrap:nowrap; /* prevents icon going to new line */
 }
 }
+.contact-item,
+.location-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  flex-wrap:nowrap; /* prevents icon going to new line */
+}
 
 .footer-bottom a {
   color: #cfa92a;
