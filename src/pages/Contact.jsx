@@ -110,7 +110,7 @@ export default function Contact() {
     <FaPhoneAlt className="icon"/>
     <div className="phone-list">
       <p><strong>Jay Patel:</strong> <a href="tel:7874170533">78741 70533</a></p>
-      <p><strong>Nsihu Patel:</strong> <a href="tel:9913612354">99136 12354</a></p>
+      <p><strong>Nishu Patel:</strong> <a href="tel:9913612354">99136 12354</a></p>
       <p><strong>Ashish Patel:</strong> <a href="tel:9081141149">90811 41149</a></p>
       <p><strong>umang Patel:</strong> <a href="tel:9408385809">94083 85809</a></p>
     </div>
