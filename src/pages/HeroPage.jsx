@@ -160,7 +160,7 @@ const HeroPage = () => {
       <div className="bottom-contact">
 
         <a
-          href="https://wa.me/919913612354?text=Hello!%20I%20am%20interested%20in%20your%20services."
+          href="https://wa.me/7874170533?text=Hello!%20I%20am%20interested%20in%20your%20services."
           target="_blank"
           rel="noreferrer"
           className="bottom-whatsapp"
@@ -169,7 +169,7 @@ const HeroPage = () => {
         </a>
 
         <a
-          href="tel:+919913612354"
+          href="tel:+7874170533"
           className="bottom-phone"
         >
           <FaPhoneAlt/>
